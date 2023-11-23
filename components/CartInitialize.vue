@@ -60,6 +60,7 @@
 
     const handleProceedAddToCart = ()=> {
         emits('addedToCart',{
+            id: addedProduct.id,
             product: addedProduct,
             quantity: quantity.value
         })

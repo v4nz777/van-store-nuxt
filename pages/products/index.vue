@@ -6,8 +6,8 @@
         Loading...
     </div>
     <ul v-else class="grid gap-3 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 min-[635px]:grid-cols-1 mx-auto justify-center">
-        <li v-for="product in products" >
-            <ProductCard :product="product" :key="product.id" @addToCartClicked="handleAddToCart"/>
+        <li v-for="product in products" :key="product.id">
+            <ProductCard :product="product" @addToCartClicked="handleAddToCart"/>
         </li>
     </ul>
 
@@ -40,7 +40,6 @@
     }
 
     const proceedAddToCart = ($event:any)=> {
-        // TODO ADD TO CART
         cartstore.addItem([$event])
         clearCartInitialize()
     }
