@@ -1,5 +1,5 @@
 <template>
-    <div class="shadow bg-white w-max h-max rounded-md p-5">
+    <div class="shadow bg-white w-max h-max rounded-md p-5 my-5">
         <NuxtLink :to="`/products/${product.id}`">
             <div class="h-56 w-56 flex flex-col items-center justify-center border-b p-3">
                 <img :src="product.image" alt="" class="object-center overflow-auto">
