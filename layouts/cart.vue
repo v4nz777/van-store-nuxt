@@ -7,8 +7,10 @@
 
 
     </header>
-    <div class="w-full h-36 bg-purple-100 flex items-center p-6 shadow-md">
-        <p class="text-purple-900 mt-12 ">Cart</p>
+    <div class="w-full h-36 flex items-center p-6 text-gray-900 pt-14 gap-2">
+        <NuxtLink to="/products/"><span>Shop</span></NuxtLink>
+        <span>></span>
+        <span> Cart</span>
     </div>
 
 

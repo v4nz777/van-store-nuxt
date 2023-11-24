@@ -1,6 +1,7 @@
 <template>
     <div>
-        checkout
+        <CheckoutSummary />
+        <PaymentDetails />
     </div>
 </template>
 

@@ -19,7 +19,7 @@
                     </div>
                     
                     <div class="w-full flex gap-5">
-                        <button class="btn" @click="animateProceedAddToCart">Proceed</button>
+                        <button class="btn hover:bg-purple-500" @click="animateProceedAddToCart">Proceed</button>
                         <button class="btn bg-white text-black border-2 border-black font-bold" @click="animateClose">Cancel</button>
 
                     </div>

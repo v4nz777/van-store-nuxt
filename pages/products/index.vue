@@ -1,8 +1,8 @@
 <template>
-    <div class="w-full flex justify-center py-5">
+    <div v-if="!pending" class="w-full flex justify-center py-5">
         <p class="text-3xl font-light">PRODUCTS</p>
     </div>
-    <div v-if="pending">
+    <div v-if="pending" class="w-full h-full flex flex-col justify-center items-center">
         Loading...
     </div>
     <ul v-else class="grid gap-3 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 min-[635px]:grid-cols-1 mx-auto justify-center">
