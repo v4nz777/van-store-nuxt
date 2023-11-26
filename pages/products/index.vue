@@ -2,10 +2,15 @@
     <div v-if="!pending" class="w-full flex justify-center py-5">
         <p class="text-3xl font-light">PRODUCTS</p>
     </div>
-    <div v-if="pending" class="w-full h-full flex flex-col justify-center items-center">
-        Loading...
+    <div v-else class="w-full flex justify-center py-5">
+        <SkeletonPlaceholder class="rounded-full w-44 h-9"/>
     </div>
-    <ul v-else class="grid gap-3 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 min-[635px]:grid-cols-1 mx-auto justify-center">
+    <ul v-if="pending" class="grid gap-3 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 min-[635px]:grid-cols-1 mx-auto justify-center">
+            <li v-for="i in 10" :key="i">
+                <SkeletonPlaceholder class="rounded-xl w-60 h-96"/>
+            </li>
+    </ul>
+    <ul v-else class="grid gap-3 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 min-[635px]:grid-cols-1 mx-auto justify-center">
         <li v-for="product in products" :key="product.id">
             <ProductCard :product="product" @addToCartClicked="handleAddToCart"/>
         </li>
