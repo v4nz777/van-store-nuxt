@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white rounded-xl w-full p-6">
+    <div class="bg-white rounded-xl w-full p-6 max-sm:overflow-x-auto">
         <div v-if="cartstore.cartIsEmpty" class="text-center">
             <p class="text-2xl my-3">Your cart is empty!</p>
             <Icon name="tabler:mood-empty" size="44px" />
@@ -8,7 +8,7 @@
             </NuxtLink>
             
         </div>
-        <table v-else class="w-full">
+        <table v-else class="w-full overscroll-x-auto">
             <thead class="w-full font-light text-sm text-center border-b">
                 <td class="text-start">Item</td>
                 <td>Unit Price</td>

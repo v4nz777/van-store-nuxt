@@ -12,7 +12,7 @@
     </ul>
     <ul v-else class="grid gap-3 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 min-[635px]:grid-cols-1 mx-auto justify-center">
         <li v-for="product in products" :key="product.id">
-            <ProductCard :product="product" @addToCartClicked="handleAddToCart"/>
+            <ProductCard :productID="product.id" @addToCartClicked="handleAddToCart"/>
         </li>
     </ul>
 
@@ -46,6 +46,7 @@
 
     const proceedAddToCart = ($event:any)=> {
         cartstore.addItem([$event])
+        cartstore.cartIsNavigated = false
         clearCartInitialize()
     }
 

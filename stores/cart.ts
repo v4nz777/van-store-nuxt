@@ -2,18 +2,25 @@ import { defineStore } from "pinia";
 
 
 
-interface Item {
+export interface Item {
     id: number
     product: {
-        id:number
-        title:string
-        description:string
-        price:number
-    }
+        id:number;
+        title:string;
+        description:string;
+        price:number;
+        image:string;
+        category:string;
+        rating:{
+            rate: number,
+            count:number
+        }
+
+    } | null
     quantity: number
 }
 
-interface GiftCode {
+export interface GiftCode {
     code: string,
     discount: number
 }
@@ -25,6 +32,8 @@ export const useCartStore = defineStore('cart',{
         items: [] as Array<Item>,
         giftCode: '',
         discount: 0,
+        tax: 2.0,
+        cartIsNavigated:false
     }),
     getters: {
       
@@ -36,17 +45,21 @@ export const useCartStore = defineStore('cart',{
         },
         cartSubTotalAmount: (state)=> {
             let price = 0
-            state.items.forEach((item:Item)=>price += item.product.price * item.quantity)
+            state.items.forEach((item:Item)=>price += (item.product?item.product.price:0) * item.quantity)
             return price
         },
         cartIsEmpty: (state):boolean=> !state.items.length,
         cartTotalAmount(state):number {
-
             let total = this.cartSubTotalAmount - state.discount
-
 
             if(total < 1)total = 0
             return total
+        },
+        cartTotalAmountTaxed(state):number {
+            return (state.tax /  100) * this.cartTotalAmount
+        },
+        cartTotalAmountWithTax():number {
+            return this.cartTotalAmountTaxed + this.cartTotalAmount
         }
        
     },

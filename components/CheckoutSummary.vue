@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!cartstore.cartIsEmpty" class="w-[700px] h-max bg-white rounded-lg p-6">
+    <div v-if="!cartstore.cartIsEmpty" class="w-full md:w-[700px] h-max bg-white rounded-lg p-6">
         <div class="mb-12 border-b">
             <h1 class="font-bold text-center">SUMMARY</h1>
         </div>
@@ -10,7 +10,7 @@
             </div>
             <div class="font-semibold text-green-900">
                 <p>{{ '$' + cartstore.cartSubTotalAmount.toFixed(2) }}</p>
-                <p>FREE</p>
+                <p class="text-sm">FREE</p>
             </div>
         </div>
         <div class=" my-5 p-3">
