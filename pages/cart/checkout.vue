@@ -5,8 +5,9 @@
              Go back to cart
         </button>
         <div class="details flex justify-center max-md:flex-col gap-10 mt-2">
-            <CartTable />
+            <!-- <CartTable /> -->
             <PaymentDetails />
+            <CartSummary />
         </div>
     </div>
     

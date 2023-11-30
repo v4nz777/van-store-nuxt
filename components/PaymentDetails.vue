@@ -1,5 +1,5 @@
 <template>
-    <div class="h-max w-[500px] bg-white rounded-lg p-6">
+    <div class="h-max w-[500px]  rounded-lg p-6">
         <div class="mb-12 border-b">
             <h1 class="font-bold text-center w-max">Payment Details</h1>
         </div>
