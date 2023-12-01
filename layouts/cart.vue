@@ -4,7 +4,9 @@
         <NuxtLink to="/" class="w-max">
             <img src="/vanstore-logo.svg" alt="" class="h-12">
         </NuxtLink>
-
+        
+        
+       
     </header>
     
     <main class="py-4 w-screen px-12">

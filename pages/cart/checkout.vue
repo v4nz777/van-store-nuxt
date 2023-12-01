@@ -6,7 +6,7 @@
         </button>
         <div class="details flex justify-center max-md:flex-col gap-10 mt-2">
             <!-- <CartTable /> -->
-            <PaymentDetails />
+            <PaypalCheckout/>
             <CartSummary />
         </div>
     </div>

@@ -8,8 +8,10 @@ export default defineNuxtConfig({
     typeCheck: true
   },
   runtimeConfig: {
+    paypalSecret: process.env.PAYPAL_SECRET,
     public: {
-      externalApiUrl: process.env.EXTERNAL_API_URL
+      externalApiUrl: process.env.EXTERNAL_API_URL,
+      paypalClientId: process.env.PAYPAL_CLIENT_ID
     }
   },
   app: {

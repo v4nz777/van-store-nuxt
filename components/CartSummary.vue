@@ -31,12 +31,15 @@
         <div class="w-full p-5">
             <table class="w-full border-separate">
                 <thead class="text-xs border-b-2">
-                    <td>ITEM</td>
-                    <td class="text-center">QTY</td>
-                    <td class="text-end">PRICE</td>
+                    <tr>
+                        <td>ITEM</td>
+                        <td class="text-center">QTY</td>
+                        <td class="text-end">PRICE</td>
+                    </tr>
                 </thead>
-                <div class="w-full  h-4"></div>
+             
                 <tbody>
+                    <tr class="w-full  h-4"></tr>
                     <tr v-for="item in cartstore.items" :key="item.id" class="">
                         <td class="flex gap-4 items-center px-0 mx-0">
                             <div class="object-contain w-9 h-max">
