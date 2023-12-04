@@ -36,6 +36,7 @@
         ,
     })
 
+
     onMounted(() => {
     if(cartstore.cartIsNavigated)chatOn.value = true
       setTimeout(() => {

@@ -99,9 +99,9 @@
                 translateY: '-400%',
                 scaleX:0,
                 scaleY:0,
-                duration:1000,
+                duration:500,
                 borderRadius: ['0%', '50%'],
-                easing: 'easeInOutExpo',
+                easing: 'easeInOutSine',
                 complete: handleProceedAddToCart
                 
             }

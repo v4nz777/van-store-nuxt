@@ -1,7 +1,7 @@
 <template>
     
     <div>
-        <button class="btn" @click="navigateTo('/cart')">
+        <button class="btn hover:bg-purple-500" @click="navigateTo('/cart')">
              Go back to cart
         </button>
         <div class="details flex justify-center max-md:flex-col gap-10 mt-2">
@@ -18,7 +18,7 @@
 <script setup lang="ts">
     const { $anime } = useNuxtApp()
 
-    const chatOn1 = ref(false)
+    const cartstore = useCartStore()
   
 
     definePageMeta({
@@ -28,6 +28,11 @@
             mode: 'out-in',
         }
         ,
+    })
+
+    onBeforeMount(() => {
+      if(!cartstore.items.length) navigateTo("/products")
+      
     })
 
 

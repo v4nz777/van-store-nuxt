@@ -30,7 +30,7 @@
                 <p class="font-semibold text-green-900">{{ '$'+ cartstore.cartTotalAmount.toFixed(2) }}</p>
             </div>
             
-            <button v-if="route.name!=='cart-checkout'" class="btn w-full" @click="navigateTo('/cart/checkout')">
+            <button v-if="route.name!=='cart-checkout'" class="btn w-full hover:bg-purple-500" @click="navigateTo('/cart/checkout')">
                 PROCEED TO CHECKOUT
             </button>
         </div>

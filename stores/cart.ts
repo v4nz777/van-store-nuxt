@@ -33,7 +33,8 @@ export const useCartStore = defineStore('cart',{
         giftCode: '',
         discount: 0,
         tax: 2.0,
-        cartIsNavigated:false
+        cartIsNavigated:false,
+
     }),
     getters: {
       
@@ -95,6 +96,13 @@ export const useCartStore = defineStore('cart',{
                 }
                 else this.discount = 0
             }
+        },
+        setCartToDefault(){
+            this.items = []
+            this.giftCode =  ''
+            this.discount =  0
+            this.tax =  2.0
+            this.cartIsNavigated = false
         }
     }
     

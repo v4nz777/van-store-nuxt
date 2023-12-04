@@ -7,10 +7,9 @@
 
         <div class="flex gap-5">
             
-
-            <button class="flex" @click="navigateTo('/cart')">
+            <button class="flex relative w-16 items-center justify-center" @click="navigateTo('/cart')">
                 <Icon name="fluent:cart-16-regular" color="white" size="38px"/>
-                <div v-if="cartstore.cartCount" class="bg-purple-500 z-10 h-8 w-8 flex items-center justify-center rounded-full">
+                <div v-if="cartstore.cartCount" class="bg-purple-500 z-10 h-8 w-8 flex items-center justify-center rounded-full absolute -right-2 top-0">
                     <span class="text-white font-bold">{{ cartstore.cartCount }}</span>
                 </div>
             </button>
@@ -21,7 +20,7 @@
     </div> -->
 
 
-    <main class="py-4 px-12 w-screen">
+    <main class="py-4 px-12 w-full">
         
         <slot></slot>
     </main>
