@@ -3,7 +3,7 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@hypernym/nuxt-anime', '@pinia/nuxt'],
+  modules: ['@nuxtjs/tailwindcss', '@hypernym/nuxt-anime', '@pinia/nuxt', 'nuxt-icon'],
   typescript: {
     typeCheck: true
   },
@@ -17,6 +17,11 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'VANSTORE | My Demo Online Shopping Store'
+    }
+  },
+  nitro: {
+    firebase: {
+      gen: 2
     }
   }
 })
