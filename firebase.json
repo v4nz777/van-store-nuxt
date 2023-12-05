@@ -1,0 +1,14 @@
+{
+  "functions": { "source": ".output/server" },
+  "hosting": {
+    "site":"vanstore-c473f",
+    "public": ".output/public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": true,
+    "rewrites": [{ "source": "**", "function": "server" }]
+  }
+}
