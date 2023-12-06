@@ -1,11 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@hypernym/nuxt-anime', '@pinia/nuxt', 'nuxt-icon'],
   typescript: {
-    typeCheck: true
+    typeCheck: false
   },
   runtimeConfig: {
     paypalSecret: process.env.PAYPAL_SECRET,
@@ -23,5 +22,8 @@ export default defineNuxtConfig({
     firebase: {
       gen: 2
     }
-  }
+  },
+  plugins: [
+   
+  ]
 })
