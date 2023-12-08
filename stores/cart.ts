@@ -1,4 +1,170 @@
-import { defineStore } from "pinia";
+// Declared these local variable to persist data from localStorage before onMounted
+let localItems:Item[] = [] as Item[];
+let localGiftCode:string = '';
+let localDiscount:number = 0;
+let localTax:number = 2.0;
+let localCartIsNavigated:boolean = false;
+
+// MAIN STORE FOR CART
+export const useCartStore = defineStore('cart',() => {
+       const { getFromStorage, saveToLocalStorage} = useCart()
+       
+    // STATES
+        
+        const items = ref(getFromStorage('items')??localItems)
+        const giftCode = ref(getFromStorage('giftCode')??localGiftCode)
+        const discount = ref(getFromStorage('discount')??localDiscount)
+        const tax = ref(getFromStorage('tax')??localTax)
+        const cartIsNavigated = ref(getFromStorage('cartIsNavigated')??localCartIsNavigated)
+
+
+        
+
+
+
+    // GETTERS
+        const cartCount = computed(()=> {
+            if(!items.value?.length) return 0
+
+            let count=0
+            items.value.forEach((item:Item)=>count += item.quantity)
+            return count
+        })
+        
+        const cartSubTotalAmount = computed(()=> {
+            let price = 0
+            items.value.forEach((item:Item)=>price += (item.product?item.product.price:0) * item.quantity)
+            return price
+        }) 
+
+        const cartIsEmpty = computed( ():boolean=> !items.value.length)
+
+        const cartTotalAmount = computed(():number=> {
+            let total = cartSubTotalAmount.value - discount.value
+            if(total < 1)total = 0
+            return total
+        })
+
+        const cartTotalAmountTaxed = computed(():number=> {
+            return (tax.value /  100) * cartTotalAmount.value
+        })
+
+        const cartTotalAmountWithTax = computed(():number=> {
+            return cartTotalAmountTaxed.value + cartTotalAmount.value
+        })
+
+
+
+    // ACTIONS
+        const addItem = (newItems:Item[])=> {
+            newItems.forEach((newItem:Item)=>{
+                const foundIndex = newItems.findIndex((i)=>i.id === newItem.id)
+                
+                if(items.value.length&&foundIndex !== -1){ // Avoid duplication
+                    items.value[foundIndex].quantity += newItem.quantity
+                    return
+                }
+                items.value.push(newItem)
+            })
+        }
+
+        const changeQuantity = (id:number, action:string) => {
+            const foundIndex = items.value.findIndex((i:Item)=>i.id === id)
+            if(action === 'increase')items.value[foundIndex].quantity ++
+            else if(action === 'decrease')items.value[foundIndex].quantity--
+
+            if(items.value[foundIndex].quantity < 1) items.value.splice(foundIndex,1)
+        }
+
+        /**  Input an Array of valid codes from giftcodes database */
+        const validateGiftCode = (sourceValidGiftCodes:GiftCode[]) => {
+            
+            for(let i in sourceValidGiftCodes){
+                const validCode = sourceValidGiftCodes[i]
+                if(validCode.code===giftCode.value){
+                    discount.value = validCode.discount
+                    break;
+                }
+                else discount.value = 0
+            }
+        }
+
+        const $reset = ()=> {
+            console.log('hello')
+        }
+
+ 
+    // SIDE EFFECTS
+    watch(items, (value)=> {
+        saveToLocalStorage('items',value)
+    }, { deep:true })
+
+    watch(giftCode, (value)=> {
+        saveToLocalStorage('giftCode',value)
+    }, { deep:true })
+
+    watch(discount, (value)=> {
+        saveToLocalStorage('discount',value)
+    }, { deep:true })
+
+    watch(tax, (value)=> {
+        saveToLocalStorage('tax',value)
+    }, { deep:true })
+
+    watch(cartIsNavigated, (value)=> {
+        saveToLocalStorage('cartIsNavigated',value)
+    }, { deep:true })
+
+
+
+
+    onBeforeMount(() => {
+        localItems = getFromStorage('items') as Item[]
+        localGiftCode = getFromStorage('giftCode')
+        localDiscount = getFromStorage('discount')
+        localTax = getFromStorage('tax')
+        localCartIsNavigated = getFromStorage('cartIsNavigated')
+        console.log('before')
+    })
+    onMounted(() => {
+        items.value = localItems as Item[]
+        giftCode.value = localGiftCode
+        discount.value = localDiscount
+        tax.value = localTax
+        cartIsNavigated.value = localCartIsNavigated
+        console.log('after')
+    })
+
+    
+  
+
+
+    
+
+    return {
+        items,
+        giftCode,
+        discount,
+        tax,
+        cartIsNavigated,
+
+        cartCount,
+        cartSubTotalAmount,
+        cartIsEmpty,
+        cartTotalAmount,
+        cartTotalAmountTaxed,
+        cartTotalAmountWithTax,
+
+        addItem,
+        changeQuantity,
+        validateGiftCode,
+
+    }
+})
+
+    
+
+
 
 
 
@@ -24,86 +190,3 @@ export interface GiftCode {
     code: string,
     discount: number
 }
-
-
-// MAIN STORE FOR CART
-export const useCartStore = defineStore('cart',{
-    state: ()=> ({
-        items: [] as Array<Item>,
-        giftCode: '',
-        discount: 0,
-        tax: 2.0,
-        cartIsNavigated:false,
-
-    }),
-    getters: {
-      
-        cartCount: (state)=>{
-            if(!state.items.length) return 0
-            let count=0
-            state.items.forEach((item:Item)=>count += item.quantity)
-            return count
-        },
-        cartSubTotalAmount: (state)=> {
-            let price = 0
-            state.items.forEach((item:Item)=>price += (item.product?item.product.price:0) * item.quantity)
-            return price
-        },
-        cartIsEmpty: (state):boolean=> !state.items.length,
-        cartTotalAmount(state):number {
-            let total = this.cartSubTotalAmount - state.discount
-
-            if(total < 1)total = 0
-            return total
-        },
-        cartTotalAmountTaxed(state):number {
-            return (state.tax /  100) * this.cartTotalAmount
-        },
-        cartTotalAmountWithTax():number {
-            return this.cartTotalAmountTaxed + this.cartTotalAmount
-        }
-       
-    },
-    actions: {
-        addItem(items:Array<Item>) {
-            items.forEach((item:Item)=>{
-                const foundIndex = this.items.findIndex((i)=>i.id === item.id)
-
-                if(foundIndex !== -1){ // Avoid duplication
-                    this.items[foundIndex].quantity += item.quantity
-                    console.log(foundIndex)
-                    return
-                }
-                this.items.push(item)
-
-            })
-        },
-        changeQuantity(id:number, action:string) {
-            const foundIndex = this.items.findIndex((i)=>i.id === id)
-            if(action === 'increase')this.items[foundIndex].quantity ++
-            else if(action === 'decrease')this.items[foundIndex].quantity--
-
-            if(this.items[foundIndex].quantity < 1) this.items.splice(foundIndex,1)
-        }, 
-        /**  Input an Array of valid codes from giftcodes database */
-        validateGiftCode(sourceValidGiftCodes:Array<GiftCode>){
-        
-            for(let i in sourceValidGiftCodes){
-                const validCode = sourceValidGiftCodes[i]
-                if(validCode.code===this.giftCode){
-                    this.discount = validCode.discount
-                    break;
-                }
-                else this.discount = 0
-            }
-        },
-        setCartToDefault(){
-            this.items = []
-            this.giftCode =  ''
-            this.discount =  0
-            this.tax =  2.0
-            this.cartIsNavigated = false
-        }
-    }
-    
-})

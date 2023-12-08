@@ -1,10 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@hypernym/nuxt-anime', '@pinia/nuxt', 'nuxt-icon'],
+  devtools: { enabled: false },
+  modules: ['@nuxtjs/tailwindcss', '@hypernym/nuxt-anime', '@pinia/nuxt', 'nuxt-icon', '@vueuse/nuxt'],
   typescript: {
-    typeCheck: false
+    typeCheck: true
   },
   runtimeConfig: {
     paypalSecret: process.env.PAYPAL_SECRET,

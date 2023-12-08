@@ -30,9 +30,8 @@
         ,
     })
 
-    onBeforeMount(() => {
+    onMounted(() => {
       if(!cartstore.items.length) navigateTo("/products")
-      
     })
 
 
