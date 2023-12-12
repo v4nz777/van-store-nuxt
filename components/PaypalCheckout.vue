@@ -122,8 +122,10 @@
                         paypalTransaction: orderData
                     })
                     
+                    
+                    // await cartstore.reset()
+                    
                     navigateTo('/cart/thankyou')
-                    cartstore.setCartToDefault()
                     return response
                 
             },

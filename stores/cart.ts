@@ -9,6 +9,9 @@ let localCartIsNavigated:boolean = false;
 export const useCartStore = defineStore('cart',() => {
        const { getFromStorage, saveToLocalStorage} = useCart()
        
+
+
+
     // STATES
         
         const items = ref(getFromStorage('items')??localItems)
@@ -18,7 +21,12 @@ export const useCartStore = defineStore('cart',() => {
         const cartIsNavigated = ref(getFromStorage('cartIsNavigated')??localCartIsNavigated)
 
 
-        
+        // const items = useLocalStorage('items',[] as Item[])
+        // const giftCode = useLocalStorage('giftCode','')
+        // const discount = useLocalStorage('discount',0)
+        // const tax = useLocalStorage('tax',2.0)
+        // const cartIsNavigated = useLocalStorage('cartIsNavigated',false)
+
 
 
 
@@ -60,7 +68,7 @@ export const useCartStore = defineStore('cart',() => {
             newItems.forEach((newItem:Item)=>{
                 const foundIndex = newItems.findIndex((i)=>i.id === newItem.id)
                 
-                if(items.value.length&&foundIndex !== -1){ // Avoid duplication
+                if(items.value?.length&&foundIndex !== -1){ // Avoid duplication
                     items.value[foundIndex].quantity += newItem.quantity
                     return
                 }
@@ -89,8 +97,13 @@ export const useCartStore = defineStore('cart',() => {
             }
         }
 
-        const $reset = ()=> {
-            console.log('hello')
+
+        const reset =  ()=> {
+            items.value = localItems as Item[]
+            giftCode.value = localGiftCode
+            discount.value = localDiscount
+            tax.value = localTax
+            cartIsNavigated.value = localCartIsNavigated
         }
 
  
@@ -119,20 +132,17 @@ export const useCartStore = defineStore('cart',() => {
 
 
     onBeforeMount(() => {
-        localItems = getFromStorage('items') as Item[]
-        localGiftCode = getFromStorage('giftCode')
-        localDiscount = getFromStorage('discount')
-        localTax = getFromStorage('tax')
-        localCartIsNavigated = getFromStorage('cartIsNavigated')
         console.log('before')
+        localItems = getFromStorage('items')?? [] as Item[]
+        localGiftCode = getFromStorage('giftCode')?? ''
+        localDiscount = getFromStorage('discount')?? 0
+        localTax = getFromStorage('tax')?? 2.0
+        localCartIsNavigated = getFromStorage('cartIsNavigated')?? false
+  
     })
     onMounted(() => {
-        items.value = localItems as Item[]
-        giftCode.value = localGiftCode
-        discount.value = localDiscount
-        tax.value = localTax
-        cartIsNavigated.value = localCartIsNavigated
         console.log('after')
+        reset()
     })
 
     
@@ -158,6 +168,7 @@ export const useCartStore = defineStore('cart',() => {
         addItem,
         changeQuantity,
         validateGiftCode,
+        reset
 
     }
 })

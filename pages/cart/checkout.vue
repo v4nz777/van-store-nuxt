@@ -38,13 +38,4 @@
 </script>
 
 <style scoped>
-    /* .cart-entrance-enter-active,
-    .cart-entrance-leave-active {
-    transition: all 0.3s;
-    }
-    .cart-entrance-enter-from,
-    .cart-entrance-leave-to {
-        transform: translate(50px, 0);
-        opacity: 0;
-    } */
 </style>
