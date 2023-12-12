@@ -18,11 +18,6 @@ export default defineNuxtConfig({
       title: 'VANSTORE | My Demo Online Shopping Store'
     }
   },
-  nitro: {
-    firebase: {
-      gen: 2
-    }
-  },
   plugins: [
    
   ]
