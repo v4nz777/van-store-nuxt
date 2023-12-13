@@ -1,7 +1,16 @@
 # VANSTORE
 Built with Nuxt 3
 
-Check live demo [Vanstore]([https://nuxt.com/docs/getting-started/introduction](https://van-store-nuxt.vercel.app/)
+Check live demo [Vanstore](https://van-store-nuxt.vercel.app/)
+
+## Features
+### Using Paypal Sanbox API 
+Use these credentials for demo payment.
+ - Username: `sb-hoo4y28424498@personal.example.com`
+ - Password: `pass123word`
+
+
+
 
 ## Dev Setup
 
