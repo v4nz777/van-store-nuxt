@@ -38,7 +38,7 @@
                 fxContainer?.setAttribute('closing','')
                 setTimeout(() => {
                     open.value=false
-                }, 1000);
+                }, 400);
 
             }else{
                 open.value=true
@@ -57,16 +57,23 @@
 <style scoped>
     
     #fx-container[open] {
-        animation: fade-in 1000ms ease-in;
+        animation: fade-in 350ms ease-in;
     }
     #fx-container[closing] {
         opacity: 0;
-        animation: fade-out 500ms ease-in;
+        animation: fade-out 200ms ease-in;
     }
 
     @keyframes fade-in {
-        0% { opacity: 0 }
-        100% { opacity: 1}
+        0% { 
+            scale: 0;
+            border-radius: 100%;
+            transform: translate(-300%,-200%)
+        }
+        100% { 
+            scale: 1;
+            transform: translate(0)
+        }
     }
     @keyframes fade-out {
         0% { opacity: 1 }
